@@ -1,0 +1,22 @@
+package com.orderservice.controller;
+
+import com.orderservice.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import com.orderservice.dto.OrderRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/order")
+@RequiredArgsConstructor
+public class OrderController {
+
+    private final OrderService orderService;
+
+    @PostMapping("/addOrder")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String placeOrder(@RequestBody OrderRequest orderRequest) {
+        orderService.placeOrder(orderRequest);
+        return "Order Placed Successfully";
+    }
+}
